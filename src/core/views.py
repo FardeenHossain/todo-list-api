@@ -9,3 +9,7 @@ class ToDoViewSet(viewsets.ModelViewSet):
 
     queryset = ToDo.objects.all()
     serializer_class = ToDoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
