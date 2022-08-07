@@ -5,7 +5,7 @@ from core.serializers import ToDoSerializer, UserSerializer
 
 
 class ToDoViewSet(viewsets.ModelViewSet):
-    """This viewset automaitcally provides create, read, update, and delete actions."""
+    """This viewset automatcally provides create, read, update, and delete actions."""
 
     queryset = ToDo.objects.all()
     serializer_class = ToDoSerializer
@@ -13,3 +13,10 @@ class ToDoViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """This viewset automatically provides read actions."""
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
